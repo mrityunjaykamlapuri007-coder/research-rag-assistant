@@ -1,0 +1,14 @@
+faiss-cpu
+sentence-transformers
+pymupdf
+numpy
+tqdm
+python-dotenv
+scikit-learn
+langchain
+langchain-community
+langchain-groq
+rank-bm25
+streamlit
+rouge-score
+bert-score
