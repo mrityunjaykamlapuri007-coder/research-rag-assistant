@@ -83,7 +83,7 @@ PDFs (21 Research Papers)
 
 ## 📊 Evaluation Results
 
-Evaluated on **38 domain-specific question-answer pairs** using multiple metrics:
+Evaluated on **42 domain-specific question-answer pairs** using multiple metrics:
 
 | Metric | Start | Final | Improvement |
 |---|---|---|---|
