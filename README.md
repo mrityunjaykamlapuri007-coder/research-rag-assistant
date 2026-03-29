@@ -1,20 +1,38 @@
 # ⚗️ Research RAG Assistant
 
-> **Production-grade Retrieval-Augmented Generation system for scientific research papers on piezoelectric ceramics.**
+<p align="center">
+  <img src="https://img.shields.io/badge/LLM-LLaMA%203.1%208B-blue?style=for-the-badge&logo=meta" />
+  <img src="https://img.shields.io/badge/Embeddings-BGE--Large-orange?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Search-FAISS%20%2B%20BM25-green?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Backend-FastAPI-teal?style=for-the-badge&logo=fastapi" />
+  <img src="https://img.shields.io/badge/Frontend-Streamlit-red?style=for-the-badge&logo=streamlit" />
+  <img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" />
+</p>
 
-Built by **Mrityunjay Kumar**
+> Production-grade Retrieval-Augmented Generation system for scientific research papers on piezoelectric ceramics. Ask natural language questions across 21 research papers and get precise, cited answers powered by LLaMA 3.1 8B.
+
+**Built by [Mrityunjay Kumar](https://github.com/mrityunjaykamlapuri007-coder)**
 
 ---
 
-## 🚀 Live Demo
+## 🎬 Demo
 
-> Ask questions across 21 research papers on CaBi₂Nb₂O₉ piezoelectric ceramics and get precise, cited answers powered by LLaMA 3.1 8B.
+<!-- Add demo GIF here after recording -->
+> _Demo GIF coming soon — Streamlit UI with source citations and rerank scores_
 
 ---
 
-## 📌 Overview
+## 📊 Evaluation Results
 
-This project implements an advanced RAG pipeline that allows users to query a corpus of scientific research papers using natural language. The system retrieves the most relevant content using hybrid search, reranks it with a cross-encoder, compresses the context intelligently, and generates accurate answers using a locally running quantized LLM.
+Evaluated on **42 domain-specific QA pairs** across the research corpus:
+
+| Metric | Baseline | Final | Improvement |
+|--------|----------|-------|-------------|
+| ROUGE-1 | 0.052 | 0.284 | **+446%** |
+| ROUGE-2 | 0.010 | 0.137 | **+1270%** |
+| ROUGE-L | 0.039 | 0.226 | **+479%** |
+| BERTScore F1 | 0.394 | 0.611 | **+55%** |
+| Semantic Similarity | 0.671 | 0.840 | **+25%** |
 
 ---
 
@@ -67,7 +85,7 @@ PDFs (21 Research Papers)
 ## 🔥 Key Features
 
 | Feature | Description |
-|---|---|
+|---------|-------------|
 | **Hybrid Search** | Combines BM25 keyword search + FAISS semantic search |
 | **RRF Fusion** | Reciprocal Rank Fusion merges both result sets intelligently |
 | **Cross-Encoder Reranking** | BGE-Reranker-Large rescores retrieved chunks for precision |
@@ -81,34 +99,20 @@ PDFs (21 Research Papers)
 
 ---
 
-## 📊 Evaluation Results
-
-Evaluated on **42 domain-specific question-answer pairs** using multiple metrics:
-
-| Metric | Start | Final | Improvement |
-|---|---|---|---|
-| ROUGE-1 | 0.052 | **0.284** | +446% |
-| ROUGE-2 | 0.010 | **0.137** | +1270% |
-| ROUGE-L | 0.039 | **0.226** | +479% |
-| BERTScore F1 | 0.394 | **0.611** | +55% |
-| Semantic Similarity | 0.671 | **0.840** | +25% |
-
----
-
 ## 🛠️ Tech Stack
 
 | Component | Tool |
-|---|---|
-| **LLM** | LLaMA 3.1 8B Instruct (4-bit NF4 via bitsandbytes) |
-| **Embeddings** | BAAI/bge-large-en-v1.5 |
-| **Reranker** | BAAI/bge-reranker-large (CrossEncoder) |
-| **Vector Store** | FAISS (local) |
-| **Sparse Search** | BM25 (rank-bm25) |
-| **PDF Parsing** | PyMuPDF (fitz) |
-| **Framework** | LangChain |
-| **Backend** | FastAPI + Uvicorn |
-| **Frontend** | Streamlit |
-| **Evaluation** | ROUGE, BERTScore, Semantic Similarity |
+|-----------|------|
+| LLM | LLaMA 3.1 8B Instruct (4-bit NF4 via bitsandbytes) |
+| Embeddings | BAAI/bge-large-en-v1.5 |
+| Reranker | BAAI/bge-reranker-large (CrossEncoder) |
+| Vector Store | FAISS (local) |
+| Sparse Search | BM25 (rank-bm25) |
+| PDF Parsing | PyMuPDF (fitz) |
+| Framework | LangChain |
+| Backend | FastAPI + Uvicorn |
+| Frontend | Streamlit |
+| Evaluation | ROUGE, BERTScore, Semantic Similarity |
 
 ---
 
@@ -117,24 +121,25 @@ Evaluated on **42 domain-specific question-answer pairs** using multiple metrics
 ```
 research-rag-assistant/
 ├── data/
-│   └── papers/              ← 21 research PDFs
-├── vectorstore/
-│   ├── faiss_index/         ← FAISS vector index
-│   └── chunks.json          ← BM25 chunk metadata
+│   └── papers/               ← 21 research PDFs
 ├── src/
-│   ├── ingestion.py         ← PDF processing pipeline
-│   ├── retriever.py         ← Hybrid search + RRF fusion
-│   ├── reranker.py          ← CrossEncoder reranking
-│   ├── context_compressor.py← Sentence-level compression
-│   ├── rag_chain.py         ← LLM + prompt + chat history
-│   ├── evaluator.py         ← ROUGE + BERTScore + Sem Sim
-│   └── main.py              ← FastAPI backend
-├── app.py                   ← Streamlit frontend
-├── download_model.py        ← HuggingFace model downloader
+│   ├── ingestion.py          ← PDF processing pipeline
+│   ├── retriever.py          ← Hybrid search + RRF fusion
+│   ├── reranker.py           ← CrossEncoder reranking
+│   ├── context_compressor.py ← Sentence-level compression
+│   ├── rag_chain.py          ← LLM + prompt + chat history
+│   ├── evaluator.py          ← ROUGE + BERTScore + Sem Sim
+│   └── main.py               ← FastAPI backend
+├── kaggle/
+│   └── kaggle_chain_and_evaluation.ipynb  ← Kaggle notebook (GPU)
+├── app.py                    ← Streamlit frontend
+├── download_model.py         ← HuggingFace model downloader
 ├── requirements.txt
 ├── .env.example
 └── README.md
 ```
+
+> **Note:** `vectorstore/` and `models/` are excluded from git (see `.gitignore`). Generate them locally using the setup steps below.
 
 ---
 
@@ -172,60 +177,50 @@ HF_TOKEN=your_huggingface_token_here
 python download_model.py
 ```
 
-### 6. Add research papers
-Place your PDF files in `data/papers/`
-
-### 7. Run ingestion pipeline
+### 6. Run ingestion pipeline
 ```bash
 python src/ingestion.py
 ```
 
-### 8. Start FastAPI backend
+### 7. Start FastAPI backend
 ```bash
-python src/main.py
+cd src
+uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
-### 9. Start Streamlit frontend
+### 8. Start Streamlit frontend
 ```bash
 streamlit run app.py
 ```
 
-Open **http://localhost:8501** in your browser ✅
+Open [http://localhost:8501](http://localhost:8501) ✅
 
 ---
 
 ## 🔌 API Endpoints
 
 | Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/` | API status |
-| `GET` | `/health` | Health check with model info |
-| `POST` | `/ask` | Ask a question, get answer + chat history |
-| `POST` | `/retrieve` | Retrieve relevant chunks for a query |
+|--------|----------|-------------|
+| GET | `/health` | Health check with model info |
+| POST | `/ask` | Ask a question, get answer + sources |
+| POST | `/retrieve` | Retrieve relevant chunks for a query |
 
-### Example request
+**Example request:**
 ```bash
 curl -X POST http://localhost:8000/ask \
   -H "Content-Type: application/json" \
-  -d '{"question": "What is the Curie temperature of CBN ceramics?", "chat_history": []}'
+  -d '{"query": "What is the Curie temperature of CBN ceramics?", "chat_history": []}'
 ```
 
-### Example response
+**Example response:**
 ```json
 {
-  "answer": "The Curie temperature of pure CaBi₂Nb₂O₉ (CBN) ceramics is approximately 930°C, which is the highest known Tc among two-layer Aurivillius phase ceramics.",
-  "chat_history": ["User: What is the Curie temperature...", "Assistant: The Curie temperature..."]
+  "answer": "The Curie temperature of pure CaBi₂Nb₂O₉ (CBN) ceramics is approximately 930°C, the highest known Tc among two-layer Aurivillius phase ceramics.",
+  "sources": [
+    {"source": "Liu 2018", "page": 3, "section": "result"}
+  ]
 }
 ```
-
----
-
-## 📝 Environment Variables
-
-| Variable | Description |
-|---|---|
-| `HF_TOKEN` | HuggingFace access token for LLaMA model |
-| `API_URL` | FastAPI backend URL (default: http://localhost:8000) |
 
 ---
 
@@ -235,24 +230,24 @@ curl -X POST http://localhost:8000/ask \
 python src/evaluator.py
 ```
 
-Results saved to `evaluation_results.csv`
+Results saved to `evaluation_results.csv`. Full evaluation notebook available in `kaggle/`.
 
 ---
 
 ## 📖 Research Domain
 
 This system is specialized for research papers on:
-- **CaBi₂Nb₂O₉ (CBN)** piezoelectric ceramics
-- **Aurivillius-type** bismuth layered structure ferroelectrics
+- CaBi₂Nb₂O₉ (CBN) piezoelectric ceramics
+- Aurivillius-type bismuth layered structure ferroelectrics (BLSF)
 - High-temperature piezoelectric applications
-- Chemical doping and substitution effects
+- Chemical doping and A-site/B-site substitution effects
 
 ---
 
 ## 🤝 Author
 
 **Mrityunjay Kumar**
-- GitHub: [@mrityunjaykamlapuri007-coder](https://github.com/mrityunjaykamlapuri007-coder)
+GitHub: [@mrityunjaykamlapuri007-coder](https://github.com/mrityunjaykamlapuri007-coder)
 
 ---
 
@@ -262,4 +257,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-## ⭐ If you found this useful, please star the repository!
+⭐ If you found this useful, please star the repository!
