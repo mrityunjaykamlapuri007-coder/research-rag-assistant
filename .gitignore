@@ -1,4 +1,5 @@
 venv/
+.venv/
 .env
 models/
 __pycache__/
@@ -9,3 +10,11 @@ src/__pycache__/
 .DS_Store
 *.ipynb_checkpoints
 *.ipynb
+vectorstore/
+*.faiss
+*.pkl
+*.pyo
+*.egg-info/
+dist/
+
+.ipynb_checkpoints/
