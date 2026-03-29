@@ -12,3 +12,7 @@ rank-bm25
 streamlit
 rouge-score
 bert-score
+fastapi
+pydantic
+uvicorn
+requests
