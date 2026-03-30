@@ -1,6 +1,6 @@
 from sentence_transformers import CrossEncoder
 
-reranker_model = CrossEncoder("BAAI/bge-reranker-large")
+reranker_model = CrossEncoder("BAAI/bge-reranker-large", device="cpu")
 
 
 def rerank(query, chunks, top_k=6, threshold=-5.0):
